@@ -8,7 +8,8 @@ def get_golden_index(df: np.array, gold: np.array) -> np.array:
 
 def mrr(gold: np.array, preds: np.array):
     ranks = preds.argsort(1)[:, ::-1]
-    ans = np.argwhere(ranks == gold[:, None])
+    ans = np.argwhere(ranks == gold[:, None])[:, 1]
+
     return (1 / (1 + ans)).mean()
 
 def get_metrics(gold: np.array, preds: np.array):

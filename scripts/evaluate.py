@@ -19,7 +19,7 @@ if __name__ == '__main__':
     gold = pd.read_csv(PATH / f"{PART}.gold.v1.txt", sep='\t', header=None)
     test_idx = pd.read_csv(PATH / f"split_test.txt", sep='\t', header=None).T.values[0]
 
-    metrics = evaluate(data.loc[test_idx, :].values, gold.loc[test_idx, :].values, preds.values)
+    metrics = evaluate(data.loc[test_idx, :].iloc[:, 2:].values, gold.loc[test_idx, :].values, preds.values)
 
     print(f"Accuracy@Top1 {metrics['acc1']:.4f}")
     print(f"Accuracy@Top3 {metrics['acc3']:.4f}")

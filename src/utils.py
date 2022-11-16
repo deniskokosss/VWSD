@@ -6,11 +6,13 @@ def get_golden_index(df: np.array, gold: np.array) -> np.array:
     ans = np.argwhere(df == gold)[:, 1]
     return ans
 
+
 def mrr(gold: np.array, preds: np.array):
     ranks = preds.argsort(1)[:, ::-1]
     ans = np.argwhere(ranks == gold[:, None])[:, 1]
 
     return (1 / (1 + ans)).mean()
+
 
 def get_metrics(gold: np.array, preds: np.array):
     return {
@@ -19,13 +21,15 @@ def get_metrics(gold: np.array, preds: np.array):
         'mrr': mrr(gold, preds)
     }
 
+
 def evaluate(df: np.array, gold: np.array, preds: np.array):
     """
-    :param df: format as in train.data.v1.txt
+    :param df: format as in train.data.v1.txt (without first two columns)
     :param gold: format as in train.gold.v1.txt
     :param preds: format as in sample_submission.csv
     :return: dict with metrics (keys: acc1, acc3, mrr)
     """
     assert df.shape[0] == gold.shape[0] == preds.shape[0], "shape mismatch"
+    assert df.shape[1] == preds.shape[1] == 10, "Axis 1 shape mismatch"
     gold_numerical = get_golden_index(df, gold)
     return get_metrics(gold_numerical, preds)

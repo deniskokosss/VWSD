@@ -9,7 +9,7 @@ def evaluate(
     df: pd.DataFrame,
     predictions: np.array,
 ) -> Dict[str, float]:
-    return evaluate_raw(df.drop("label", axis=1).values, df[["label",]].values, predictions)
+    return evaluate_raw(df.drop(["word", "context", "label"], axis=1).values, df[["label",]].values, predictions)
 
 def make_submission_file(
     predictions: np.array,

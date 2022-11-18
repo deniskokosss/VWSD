@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+import json
 
 import pandas as pd
 
@@ -11,7 +12,8 @@ if __name__ == '__main__':
 
     filepath = Path(sys.argv[1]).resolve()
     print(f"Evaluating {filepath} ...")
-    preds = pd.read_csv(filepath, sep='\t', header=None)
+    with open(filepath, 'r') as f:
+        preds = json.load(f)
 
     PART = 'train'
     PATH = Path('../data').resolve() / f"{PART}_v1"
@@ -19,7 +21,7 @@ if __name__ == '__main__':
     gold = pd.read_csv(PATH / f"{PART}.gold.v1.txt", sep='\t', header=None)
     test_idx = pd.read_csv(PATH / f"split_test.txt", sep='\t', header=None).T.values[0]
 
-    metrics = evaluate(data.loc[test_idx, :].iloc[:, 2:].values, gold.loc[test_idx, :].values, preds.values)
+    metrics = evaluate(data.loc[test_idx, :].iloc[:, 2:].values, gold.loc[test_idx, :].values, preds)
 
     print(f"Accuracy@Top1 {metrics['acc1']:.4f}")
     print(f"Accuracy@Top3 {metrics['acc3']:.4f}")

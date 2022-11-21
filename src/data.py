@@ -7,12 +7,7 @@ import numpy as np
 from functools import reduce
 from PIL import Image
 
-@dataclass
-class SplitSpecs:
-    name: str
-    part: float
-
-class SplitLoader:
+class CustomSplitLoader:
     def __init__(
         self,
         split_parts: Dict[str, float],

@@ -30,7 +30,7 @@ Our local leaderboard (see dev-test split below) https://docs.google.com/spreads
 cd scripts
 python generate_dev_test_split.py
 python generate_sample_submission.py
-python evaluate ../data/train_v1/sample_submission.csv
+python evaluate ../data/train_v1/sample_submission.json
 ```
 - data/train_v1/split_test.txt - Zero-based **test** indexes in train.data.v1.txt and train.gold.v1.txt
 - data/train_v1/split_train.txt - Zero-based **train** indexes in train.data.v1.txt and train.gold.v1.txt

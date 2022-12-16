@@ -13,3 +13,5 @@ SAVE_CHECKPOINT_PATH: ${oc.env:VWSD_root}/scripts/blip_itm_classifier/checkpoint
 hydra:
   launcher:
     n_jobs: 1
+  run:
+    dir: outputs/${hydra.job.name}/${now:%Y-%m-%d_%H-%M-%S}

@@ -1,4 +1,4 @@
-scancel#!/bin/bash
+#!/bin/bash
 #SBATCH -G 1
 #SBATCH -n 10
 #SBATCH --time=55:00:00

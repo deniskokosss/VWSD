@@ -1,4 +1,4 @@
-TYPE: 36k
+TYPE: wikidata
 DATASET_VERSION: v5
 PART: train
 PATH: ${oc.env:VWSD_root}/data/${data.PART}_${data.DATASET_VERSION}

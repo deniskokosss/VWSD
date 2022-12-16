@@ -37,6 +37,7 @@ from tqdm import tqdm
 from sklearn.metrics import top_k_accuracy_score
 from omegaconf import DictConfig, OmegaConf
 import hydra
+from hydra.core.hydra_config import HydraConfig
 
 from src.data import CustomSplitLoader
 from src.utils import evaluate, mrr
@@ -60,7 +61,10 @@ def run(cfg: DictConfig) -> None:
     Image.MAX_IMAGE_PIXELS = None
     ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-    writer = SummaryWriter()
+    pth = Path(HydraConfig.get().runtime.output_dir)
+    writer = SummaryWriter(pth)
+
+    print(f"OUTPUT_DIR={pth}")
 
     print(f"Running on {DEVICE}")
 
@@ -200,7 +204,7 @@ def run(cfg: DictConfig) -> None:
         print(f"{num_training_steps} training steps which include {num_warmup_steps} warmup ones")
 
         step_num = 0
-        steps_since_last_eval = cfg.train.STEPS_BETWEEN_EVAL
+        steps_since_last_eval = 0 # cfg.train.STEPS_BETWEEN_EVAL
         grad_accum_step_cnt = 0
         save_checkpoint_step_cnt = 0
 

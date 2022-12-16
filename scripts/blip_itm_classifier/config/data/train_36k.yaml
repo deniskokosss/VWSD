@@ -1,0 +1,27 @@
+TYPE: 36k
+DATASET_VERSION: v5
+PART: train
+PATH: ${oc.env:VWSD_root}/data/${data.PART}_${data.DATASET_VERSION}
+DATA_PATH: ${data.PATH}/${data.PART}.data.v1.txt
+LABELS_PATH: ${data.PATH}/${data.PART}.gold.v1.txt
+
+TRAIN_PATH: ${data.PATH}/train.data.v5_36k.txt
+TRAIN_LABELS_PATH: ${data.PATH}/train.gold.v5_36k.txt
+
+IMAGES_PATH:  ${data.PATH}/${data.PART}_images_${data.DATASET_VERSION}s
+IMAGES_FOLDER_STRUCT: ${data.PATH}/folder_struct.json
+TRAIN_SPLIT_PATH: ${data.PATH}/split_train.txt
+VALIDATION_SPLIT_PATH: ${data.PATH}/split_valid.txt
+
+TEST_SPLIT_PATH: ${data.PATH}/split_test.txt
+FOLDER_STRUCT:  ${data.PATH}/folder_struct.json
+
+VALID2_PATH: ${data.PATH}/valid2.data.v1.txt
+VALID2_LABELS_PATH: ${data.PATH}/valid2.gold.v1.txt
+
+VALID5_PATH: ${data.PATH}/valid.data.v5.txt
+VALID5_LABELS_PATH: ${data.PATH}/valid.gold.v5.txt
+
+TEST2_PATH:  ${data.PATH}/test2.data.v1.txt
+TEST2_LABELS_PATH:  ${data.PATH}/test2.gold.v1.txt
+DEVICE: cuda

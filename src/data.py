@@ -6,6 +6,7 @@ from logging import warn
 import numpy as np
 from functools import reduce
 from PIL import Image
+import torch
 
 class CustomSplitLoader:
     def __init__(
@@ -48,3 +49,18 @@ class CustomSplitLoader:
         df.columns = ["word", "context"] + [f"image{i}" for i in range(10)]
         df["label"] = pd.read_csv(self.labels_path, sep="\t", header=None)
         return self.make_word_isolated_splits(df) if self.isolate_words else self.make_simple_splits(df)
+
+class ImageSet:
+    def __init__(
+        self,
+        images_path: Path,
+        image_processor: Callable[[Image], torch.Tensor],
+        enable_cache: bool = True,
+    ) -> None:
+        self.images_path = images_path
+        self.image_processor = image_processor
+        self.enable_cache = enable_cache
+        self.cache = dict()
+
+    def __getitem__(self, file_name: str):
+        raise NotImplementedError("Implement me!")

@@ -1,0 +1,17 @@
+defaults:
+  - data: train_36k
+  - model: blip_itm
+  - train: finetune1
+  - override hydra/launcher: joblib
+
+DO_TRAINING: True
+DO_TEST: True
+NUM_WORKERS: 2
+DEVICE: cuda
+RANDOM_STATE: 42
+SAVE_CHECKPOINT_PATH: ${oc.env:VWSD_root}/scripts/blip_itm_classifier/checkpoints/${now:%Y-%m-%d_%H-%M-%S}
+hydra:
+  launcher:
+    n_jobs: 1
+  run:
+    dir: outputs/${hydra.job.name}/${now:%Y-%m-%d_%H-%M-%S}

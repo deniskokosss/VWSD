@@ -1,16 +1,4 @@
-# %% [markdown]
-# # BLIP finetuning to target task
-# 
-# TODO: rewrite this to reflect the latest changes
-# 
-# Sample is formed from a single row of dataset:
-# $$\operatorname{batch} = ((E_t, E_{i_0}), (E_t, E_{i_1}), ..., (E_t, E_{i_9})); \operatorname{batch} : R^{10 \times (E_t + E_i)}$$
-# ITM predicts probas for $y = 0$, $y = 1$
-# $$\operatorname{ITM} : R^{10 \times (E_t + E_i)} \rightarrow R^{10 \times 2}$$
-# Model is defined as:
-# $$\operatorname{F} = \operatorname{softmax} \circ \operatorname{ITM} \circ \operatorname{batch}$$
-# $$\operatorname{F} : R^{10 \times (E_t + E_i)} \rightarrow R^{10}$$
-# So, this definition is for a single row
+
 import os
 from pathlib import Path
 import logging
@@ -27,7 +15,7 @@ import numpy as np
 import torch
 from PIL import Image, ImageFile
 import torch.nn as nn
-from lavis.models import load_model_and_preprocess, BlipBase
+from lavis.models import load_model_and_preprocess, BlipBase, load_model
 from lavis.processors import load_processor
 import torch.nn.functional as F
 from transformers import get_linear_schedule_with_warmup
@@ -41,7 +29,8 @@ from hydra.core.hydra_config import HydraConfig
 
 from src.data import CustomSplitLoader
 from src.utils import evaluate, mrr
-from src.blip_itm import ItmDataset, Classifier
+from src.blip_retrieval import BLIPRetrieval, RetrievalDataset
+from src.blip_itm import ItmDataset
 
 
 def to_device(object, device):
@@ -97,15 +86,15 @@ def run(cfg: DictConfig) -> None:
         elif cfg.data.TYPE == 'default':
             train_df = df.loc[pd.read_csv(cfg.data.TRAIN_SPLIT_PATH, sep='\t', header=None).T.values[0]]
 
-    blip_model, vis_processors, text_processors = load_model_and_preprocess(
-        "blip_image_text_matching", cfg.model.BLIP_VARIANT, is_eval=True
+    _, vis_processors, text_processors = load_model_and_preprocess(
+        "blip_image_text_matching", 'base', is_eval=True
     )
     if cfg.data.IMAGES_FOLDER_STRUCT:
         folder_struct = json.load(open(cfg.data.IMAGES_FOLDER_STRUCT, 'r'))
     else:
         folder_struct = None
     if cfg.DO_TRAINING:
-        train_ds = ItmDataset(
+        train_ds = RetrievalDataset(
             df=train_df,
             images_path=cfg.data.IMAGES_PATH,
             folder_struct=folder_struct,
@@ -164,7 +153,8 @@ def run(cfg: DictConfig) -> None:
         test2_dl = torch.utils.data.DataLoader(
             test2_ds, batch_size=1, num_workers=cfg.NUM_WORKERS, persistent_workers=True, shuffle=False)
 
-    model = Classifier(blip_model).to(DEVICE)
+    blip_model = load_model("blip_retrieval", cfg.model.BLIP_VARIANT)
+    model = BLIPRetrieval(blip_model, head=cfg.model.HEAD).to(DEVICE)
 
     metric2name = {
         "acc1": "Accuracy@Top1",
@@ -196,6 +186,8 @@ def run(cfg: DictConfig) -> None:
         optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.train.LR, weight_decay=cfg.train.WEIGHT_DECAY)
         num_training_steps = int(cfg.train.NUM_EPOCHS * (len(train_dl) / cfg.train.GRAD_ACCUM_STEPS))
         num_warmup_steps = int(num_training_steps * cfg.train.WARMUP_STEPS_FRAC)
+        iters_per_epoch = num_training_steps / cfg.train.NUM_EPOCHS
+
         lr_scheduler = get_linear_schedule_with_warmup(
             optimizer=optimizer,
             num_warmup_steps=num_warmup_steps,
@@ -222,14 +214,19 @@ def run(cfg: DictConfig) -> None:
         for epoch_num in range(cfg.train.NUM_EPOCHS):
             model.train()
             train_loss = 0.0
-            train_scores = {"acc1": 0, "acc3": 0, "mrr": 0}
             for batch in train_dl:
-                outputs = model(to_device(batch, DEVICE))
-                loss = loss_fn(outputs, F.one_hot(batch["label"], 10).float().to(DEVICE))
-                train_loss += loss.item()
-                new_scores = eval_batch(batch["label"], outputs)
-                train_scores = sum_scores(train_scores, new_scores)
+                batch = to_device(batch, DEVICE)
+                batch.update(
+                    {
+                        "epoch": epoch_num,
+                        "num_iters_per_epoch": iters_per_epoch,
+                        "iters": step_num,
+                    }
+                )
+                outputs = model.blip_model(batch)
+                loss = outputs['loss']
                 loss.backward()
+                train_loss += loss.item()
                 grad_accum_step_cnt += 1
 
                 if grad_accum_step_cnt == cfg.train.GRAD_ACCUM_STEPS:
@@ -240,21 +237,19 @@ def run(cfg: DictConfig) -> None:
                     optimizer.zero_grad()
 
                     writer.add_scalar("Loss/Train", train_loss / TRAIN_EFFECTIVE_BATCH_SIZE, step_num)
-                    for k, v in div_scores(train_scores, cfg.train.GRAD_ACCUM_STEPS).items():
-                        writer.add_scalar(metric2name[k] + "/Train", v, step_num)
+
                     train_loss = 0.0
-                    train_scores = {"acc1": 0, "acc3": 0, "mrr": 0}
                     grad_accum_step_cnt = 0
                     step_num += 1
                     steps_since_last_eval += 1
                     save_checkpoint_step_cnt += 1
                     progress_bar.update(1)
 
-                if steps_since_last_eval == cfg.train.STEPS_BETWEEN_EVAL: # add 0-th step
+                if steps_since_last_eval >= cfg.train.STEPS_BETWEEN_EVAL: # add 0-th step
                     model.eval()
                     del batch
 
-                    for i, dl in zip(["", "2", "WD"], (val_dl, val2_dl, val5_dl)):
+                    for i, dl in zip(["", "2", "WD", "TR"], (val_dl, val2_dl, val5_dl)):
                         model.eval()
                         val_loss = 0.0
                         val_scores = {"acc1": 0, "acc3": 0, "mrr": 0}

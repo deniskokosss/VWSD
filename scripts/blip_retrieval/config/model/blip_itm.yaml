@@ -1,0 +1,5 @@
+HEAD: itm # "itm" | "itc" | "mean"
+MODEL_VERSION: 1
+BLIP_VARIANT: coco # flickr
+NUM_PICS: 10
+CHECKPOINT: False

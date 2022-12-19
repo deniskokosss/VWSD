@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 import json
-
+from lavis.models.blip_models.blip_image_text_matching import BlipITM
 import pandas as pd
 
 from src.utils import evaluate

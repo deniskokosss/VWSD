@@ -1,0 +1,7 @@
+**/__pycache__
+**/.ipynb_checkpoints
+runs
+checkpoints
+data/train_images_v1
+data/*.json
+private

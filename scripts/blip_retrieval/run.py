@@ -123,7 +123,7 @@ def run(cfg: DictConfig) -> None:
             vis_processor=vis_processors["eval"],
         )
 
-        train_dl = torch.utils.data.DataLoader(train_ds, batch_size=cfg.train.TRAIN_BATCH_SIZE,
+        train_dl = torch.utils.data.DataLoader(train_ds, batch_size=cfg.train.TRAIN_BATCH_SIZE, drop_last=True,
                                                num_workers=cfg.NUM_WORKERS, persistent_workers=True, shuffle=True)
         val_dl = torch.utils.data.DataLoader(val_ds, batch_size=cfg.train.VALIDATION_BATCH_SIZE,
                                              num_workers=cfg.NUM_WORKERS, persistent_workers=True)

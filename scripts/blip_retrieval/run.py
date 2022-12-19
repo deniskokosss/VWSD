@@ -187,6 +187,10 @@ def run(cfg: DictConfig) -> None:
         num_training_steps = int(cfg.train.NUM_EPOCHS * (len(train_dl) / cfg.train.GRAD_ACCUM_STEPS))
         num_warmup_steps = int(num_training_steps * cfg.train.WARMUP_STEPS_FRAC)
         iters_per_epoch = num_training_steps / cfg.train.NUM_EPOCHS
+        if cfg.train.NUM_EVALUATIONS:
+            steps_between_eval = num_training_steps // cfg.train.NUM_EVALUATIONS
+        else:
+            steps_between_eval = cfg.train.STEPS_BETWEEN_EVAL
 
         lr_scheduler = get_linear_schedule_with_warmup(
             optimizer=optimizer,
@@ -196,7 +200,7 @@ def run(cfg: DictConfig) -> None:
         print(f"{num_training_steps} training steps which include {num_warmup_steps} warmup ones")
 
         step_num = 0
-        steps_since_last_eval = cfg.train.STEPS_BETWEEN_EVAL
+        steps_since_last_eval = steps_between_eval
         grad_accum_step_cnt = 0
         save_checkpoint_step_cnt = 0
 
@@ -245,7 +249,7 @@ def run(cfg: DictConfig) -> None:
                     save_checkpoint_step_cnt += 1
                     progress_bar.update(1)
 
-                if steps_since_last_eval >= cfg.train.STEPS_BETWEEN_EVAL: # add 0-th step
+                if steps_since_last_eval >= steps_between_eval: # add 0-th step
                     model.eval()
                     del batch
 

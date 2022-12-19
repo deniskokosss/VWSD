@@ -2,6 +2,6 @@
 **/.ipynb_checkpoints
 runs
 checkpoints
-data/train_images_v1
-data/*.json
+data/train_v1/train_images_v1
+data/train_v1/*.json
 private

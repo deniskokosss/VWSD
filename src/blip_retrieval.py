@@ -171,7 +171,7 @@ class RetrievalDataset(torch.utils.data.Dataset):
         return t
 
     def __getitem__(self, idx: int) -> Dict[str, Union[torch.Tensor, str, int]]:
-        row = self.df.loc[idx, :]
+        row = self.df.iloc[idx, :]
         return {
             "text_input": row.loc[self.text_field],
             "image": self._get_image_tensor(row.loc['label']),

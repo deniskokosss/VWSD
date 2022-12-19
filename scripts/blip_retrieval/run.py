@@ -184,9 +184,14 @@ def run(cfg: DictConfig) -> None:
         TRAIN_EFFECTIVE_BATCH_SIZE = cfg.train.GRAD_ACCUM_STEPS * cfg.train.TRAIN_BATCH_SIZE
 
         optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.train.LR, weight_decay=cfg.train.WEIGHT_DECAY)
-        num_training_steps = int(cfg.train.NUM_EPOCHS * (len(train_dl) / cfg.train.GRAD_ACCUM_STEPS))
+
+        if cfg.train.NUM_EPOCHS:
+            num_epochs = cfg.train.NUM_EPOCHS
+        else:
+            num_epochs = 1 + cfg.train.NUM_STEPS // (len(train_dl) // cfg.train.GRAD_ACCUM_STEPS)
+        num_training_steps = int(num_epochs * (len(train_dl) / cfg.train.GRAD_ACCUM_STEPS))
         num_warmup_steps = int(num_training_steps * cfg.train.WARMUP_STEPS_FRAC)
-        iters_per_epoch = num_training_steps / cfg.train.NUM_EPOCHS
+        iters_per_epoch = num_training_steps / num_epochs
         if cfg.train.NUM_EVALUATIONS:
             steps_between_eval = num_training_steps // cfg.train.NUM_EVALUATIONS
         else:
@@ -215,7 +220,7 @@ def run(cfg: DictConfig) -> None:
             del dict_
 
         progress_bar = tqdm(range(num_training_steps))
-        for epoch_num in range(cfg.train.NUM_EPOCHS):
+        for epoch_num in range(num_epochs):
             model.train()
             train_loss = 0.0
             for batch in train_dl:

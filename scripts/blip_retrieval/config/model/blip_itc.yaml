@@ -1,0 +1,5 @@
+HEAD: itc # "itm" | "itc"
+MODEL_VERSION: 1
+BLIP_VARIANT: flickr
+NUM_PICS: 10
+CHECKPOINT: False

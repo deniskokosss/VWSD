@@ -86,7 +86,7 @@ class BLIPRetrieval(nn.Module):
                 self.blip_model.text_proj(text_output.last_hidden_state[:, 0, :]), dim=-1
             )
 
-            sim = image_feat @ text_feat.t()
+            sim = (image_feat * text_feat).sum(dim=1)
             return sim
 
     def forward(self, inputs: Dict[str, torch.Tensor]) -> torch.Tensor:

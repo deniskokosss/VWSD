@@ -1,3 +1,7 @@
-/scripts/blip_itm_classifier/checkpoints/
-/scripts/blip_itm_classifier/outputs/
-/scripts/blip_itm_classifier/runs/
+**/__pycache__
+**/.ipynb_checkpoints
+runs
+checkpoints
+data/train_v1/train_images_v1
+data/train_v1/*.json
+private

@@ -19,6 +19,8 @@ from typing import *
 import time
 import sys
 
+import open_clip
+
 sys.path.append('../..')
 sys.path.append('..')
 
@@ -30,7 +32,7 @@ import torch.nn as nn
 from lavis.models import load_model_and_preprocess, BlipBase
 from lavis.processors import load_processor
 import torch.nn.functional as F
-from transformers import get_linear_schedule_with_warmup
+from transformers import get_linear_schedule_with_warmup, AutoTokenizer
 from transformers import BatchEncoding
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
@@ -38,16 +40,42 @@ from sklearn.metrics import top_k_accuracy_score
 from omegaconf import DictConfig, OmegaConf
 import hydra
 from hydra.core.hydra_config import HydraConfig
+import clip
+
 
 from src.data import CustomSplitLoader
 from src.utils import evaluate, mrr
-from src.blip_itm import ItmDataset, Classifier
+from src.blip_itm import ItmDataset
+from src.clip_multilang import ClipDataset as ItmDataset
+from src.blip_itm import Classifier as ClassifierBLIP
+
+from src.clip_multilang import Classifier as ClassifierCLIPM
 
 
 def to_device(object, device):
     if not isinstance(object, dict):
         raise NotImplementedError("Implement other types than dict if needed!")
     return {k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in object.items()}
+
+
+def collate_fn(batches):
+    res = {
+        "text": [],
+        "images": [],
+        "label": [],
+    }
+    for batch in batches:
+        res['text'].append(batch['text'])
+        res['images'] += batch['images']
+        res['label'].append(batch['label'])
+    res['label'] = torch.as_tensor(res['label'])
+    return res
+
+def do_nothing(x):
+    return x
+
+def convert_to_tensor(x):
+    return torch.as_tensor(np.array(x))
 
 
 @hydra.main(version_base=None, config_path="config", config_name="config")
@@ -96,10 +124,14 @@ def run(cfg: DictConfig) -> None:
             train_df["label"] = pd.read_csv(cfg.data.TRAIN_LABELS_PATH, sep='\t', header=None)
         elif cfg.data.TYPE == 'default':
             train_df = df.loc[pd.read_csv(cfg.data.TRAIN_SPLIT_PATH, sep='\t', header=None).T.values[0]]
-
-    blip_model, vis_processors, text_processors = load_model_and_preprocess(
-        "blip_image_text_matching", cfg.model.BLIP_VARIANT, is_eval=True
-    )
+    if 'clip' not in cfg.model.BLIP_VARIANT:
+        blip_model, vis_processors, text_processors = load_model_and_preprocess(
+            "blip_image_text_matching", cfg.model.BLIP_VARIANT, is_eval=True
+        )
+    else:
+        model = ClassifierCLIPM(cfg.model.BLIP_VARIANT).to(DEVICE)
+        text_processors = {'eval': do_nothing}
+        vis_processors = {'eval': do_nothing}
     if cfg.data.IMAGES_FOLDER_STRUCT:
         folder_struct = json.load(open(cfg.data.IMAGES_FOLDER_STRUCT, 'r'))
     else:
@@ -134,13 +166,13 @@ def run(cfg: DictConfig) -> None:
             vis_processor=vis_processors["eval"],
         )
 
-        train_dl = torch.utils.data.DataLoader(train_ds, batch_size=cfg.train.TRAIN_BATCH_SIZE,
+        train_dl = torch.utils.data.DataLoader(train_ds, batch_size=cfg.train.TRAIN_BATCH_SIZE, collate_fn=collate_fn,
                                                num_workers=cfg.NUM_WORKERS, persistent_workers=True, shuffle=True)
-        val_dl = torch.utils.data.DataLoader(val_ds, batch_size=cfg.train.VALIDATION_BATCH_SIZE,
+        val_dl = torch.utils.data.DataLoader(val_ds, batch_size=cfg.train.VALIDATION_BATCH_SIZE, collate_fn=collate_fn,
                                              num_workers=cfg.NUM_WORKERS, persistent_workers=True)
-        val2_dl = torch.utils.data.DataLoader(val2_ds, batch_size=cfg.train.VALIDATION_BATCH_SIZE,
+        val2_dl = torch.utils.data.DataLoader(val2_ds, batch_size=cfg.train.VALIDATION_BATCH_SIZE, collate_fn=collate_fn,
                                               num_workers=cfg.NUM_WORKERS, persistent_workers=True)
-        val5_dl = torch.utils.data.DataLoader(val5_ds, batch_size=cfg.train.VALIDATION_BATCH_SIZE,
+        val5_dl = torch.utils.data.DataLoader(val5_ds, batch_size=cfg.train.VALIDATION_BATCH_SIZE, collate_fn=collate_fn,
                                               num_workers=cfg.NUM_WORKERS, persistent_workers=True)
 
     if cfg.DO_TEST:
@@ -163,8 +195,15 @@ def run(cfg: DictConfig) -> None:
         )
         test2_dl = torch.utils.data.DataLoader(
             test2_ds, batch_size=1, num_workers=cfg.NUM_WORKERS, persistent_workers=True, shuffle=False)
+    if 'clip' not in cfg.model.BLIP_VARIANT:
+        model = ClassifierBLIP(blip_model).to(DEVICE)
 
-    model = Classifier(blip_model).to(DEVICE)
+    if cfg.model.CHECKPOINT:
+        p = Path(cfg.model.CHECKPOINT)
+        dict_ = torch.load(p)
+        model.load_state_dict(dict_['model'])
+
+        logging.info(f"Loaded {p}")
 
     metric2name = {
         "acc1": "Accuracy@Top1",
@@ -189,6 +228,8 @@ def run(cfg: DictConfig) -> None:
     def div_scores(scores, n):
         return {k: v / n for k, v in scores.items()}
 
+    train_ds[0]
+
     loss_fn = nn.CrossEntropyLoss()
     if cfg.DO_TRAINING:
         TRAIN_EFFECTIVE_BATCH_SIZE = cfg.train.GRAD_ACCUM_STEPS * cfg.train.TRAIN_BATCH_SIZE
@@ -204,7 +245,7 @@ def run(cfg: DictConfig) -> None:
         print(f"{num_training_steps} training steps which include {num_warmup_steps} warmup ones")
 
         step_num = 0
-        steps_since_last_eval = cfg.train.STEPS_BETWEEN_EVAL
+        steps_since_last_eval = cfg.train.STEPS_BETWEEN_EVAL - TRAIN_EFFECTIVE_BATCH_SIZE - 1
         grad_accum_step_cnt = 0
         save_checkpoint_step_cnt = 0
 
@@ -212,10 +253,10 @@ def run(cfg: DictConfig) -> None:
             p = Path(cfg.SAVE_CHECKPOINT_PATH) / f"step-{cfg.model.CHECKPOINT}.pt"
             dict_ = torch.load(p)
             model.load_state_dict(dict_['model'])
-            optimizer.load_state_dict(dict_['optimizer'])
-            lr_scheduler.load_state_dict(dict_['scheduler'])
             step_num = cfg.train.START_FROM
             logging.info(f"Loaded {p}")
+            optimizer.load_state_dict(dict_['optimizer'])
+            lr_scheduler.load_state_dict(dict_['scheduler'])
             del dict_
 
         progress_bar = tqdm(range(num_training_steps))
@@ -254,7 +295,7 @@ def run(cfg: DictConfig) -> None:
                     model.eval()
                     del batch
 
-                    for i, dl in zip(["", "2", "WD"], (val_dl, val2_dl, val5_dl)):
+                    for i, dl in zip(["", "2"], (val_dl, val2_dl)):
                         model.eval()
                         val_loss = 0.0
                         val_scores = {"acc1": 0, "acc3": 0, "mrr": 0}
@@ -284,31 +325,34 @@ def run(cfg: DictConfig) -> None:
                     }, p)
 
     if cfg.DO_TEST:
-
         predictions = []
-        with torch.no_grad():
-            for (i, batch) in enumerate(tqdm(test2_dl)):
-                preds = model(to_device(batch, DEVICE))[0].cpu().numpy()
-                row = test2_df.iloc[i]
-                predictions.append({row[f"image{j}"]: preds[j] for j in range(10)})
-        print("Test2: ", evaluate(
-            test2_df.iloc[:, 2:-1].values,
-            test2_df["label"].values.reshape(-1, 1),
-            predictions,
-        ))
 
-        predictions = []
         with torch.no_grad():
             for (i, batch) in enumerate(tqdm(test_dl)):
                 preds = model(to_device(batch, DEVICE))[0].cpu().numpy()
                 row = test_df.iloc[i]
                 predictions.append({row[f"image{j}"]: preds[j] for j in range(10)})
-
         print("Test1: ", evaluate(
             test_df.iloc[:, 2:-1].values,
             test_df["label"].values.reshape(-1, 1),
             predictions,
         ))
+
+        predictions = []
+        csv = []
+        with torch.no_grad():
+            for (i, batch) in enumerate(tqdm(test2_dl)):
+                preds = model(to_device(batch, DEVICE))[0].cpu().numpy()
+                row = test2_df.iloc[i]
+                predictions.append({row[f"image{j}"]: preds[j] for j in range(10)})
+
+                csv.append([key for key,val in sorted(predictions[0].items(), key=lambda x: x[1], reverse=True)])
+        print("Test2: ", evaluate(
+            test2_df.iloc[:, 2:-1].values,
+            test2_df["label"].values.reshape(-1, 1),
+            predictions,
+        ))
+        pd.DataFrame(csv).to_csv(f'{HydraConfig.get().runtime.output_dir}/predictions.txt', sep='\t', header=False,)
 
 
 if __name__ == '__main__':

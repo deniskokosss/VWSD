@@ -44,6 +44,31 @@ class BLIPRetrieval(nn.Module):
         self.blip_model = base_model
         self.match_head = head
 
+    def get_embeddings(self, inputs: Dict[str, torch.Tensor]):
+        image = inputs["image"]
+        caption = inputs["text_input"]
+
+        image_embeds = self.blip_model.visual_encoder.forward_features(image)
+
+        text = self.blip_model.tokenizer(
+            caption,
+            padding="longest",
+            truncation=True,
+            max_length=self.blip_model.max_txt_len,
+            return_tensors="pt",
+        ).to(image.device)
+        text_output = self.blip_model.text_encoder(
+            text.input_ids,
+            attention_mask=text.attention_mask,
+            return_dict=True,
+            mode="text",
+        )
+        image_feat = F.normalize(self.blip_model.vision_proj(image_embeds[:, 0, :]), dim=-1)
+        text_feat = F.normalize(
+            self.blip_model.text_proj(text_output.last_hidden_state[:, 0, :]), dim=-1
+        )
+        return image_feat, text_feat
+
     def _forward_matching(self, samples):
         image = samples["image"]
         caption = samples["text_input"]

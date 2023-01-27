@@ -18,10 +18,11 @@ from lavis.models import load_model_and_preprocess, BlipBase
 from lavis.processors import load_processor
 import torch.nn.functional as F
 from transformers import get_linear_schedule_with_warmup
-from transformers import BatchEncoding
+from transformers import BatchEncoding, AutoTokenizer
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 from sklearn.metrics import top_k_accuracy_score
+from sentence_transformers import SentenceTransformer
 
 from src.data import CustomSplitLoader
 from src.utils import evaluate, mrr
@@ -37,65 +38,70 @@ def concat_iters(*iterables):
         for value in it:
             yield value
 
+
+def to_device(object, device):
+    if not isinstance(object, dict):
+        raise NotImplementedError("Implement other types than dict if needed!")
+    return {k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in object.items()}
+
+# class CustomCLIPM(pt_multilingual_clip.MultilingualCLIP):
+#     def forward(self, txt, tokenizer):
+#         txt_tok = tokenizer(txt, padding=True, return_tensors='pt')
+#         txt_tok = txt_tok.to(torch.device('cuda'))
+#         embs = self.transformer(**txt_tok)[0]
+#         att = txt_tok['attention_mask']
+#         embs = (embs * att.unsqueeze(2)).sum(dim=1) / att.sum(dim=1)[:, None]
+#         return self.LinearTransformation(embs)
+
+
 class Classifier(nn.Module):
     def __init__(
         self,
-        blip_model: BlipBase,
-        match_head: str = "itm",
-        head_sum_bias_enabled: bool = True,
+        model_name: str,
         num_negative: int = 9,
     ) -> None:
         super().__init__()
-        self.blip_model = blip_model
-        self.match_head = match_head
+        self.text_model = SentenceTransformer(
+            'sentence-transformers/clip-ViT-B-32-multilingual-v1'
+        )
+        self.image_model = SentenceTransformer(
+            'clip-ViT-B-32'
+        )
         self.num_pics = num_negative + 1
-        if self.match_head == "mean":
-            self.head_combiner = nn.Linear(2, 1, bias=head_sum_bias_enabled)
 
     def forward(self, inputs: Dict[str, torch.Tensor]) -> torch.Tensor:
         # TODO: move all this batch-dependent stuff to collate_fn?
         # TODO: optimize!
         # text: str
         # image:
-        images_shape = inputs["images"].shape # image: (B, NUM_PICS, C, H, W)
-        batch_size = images_shape[0]
-        text_input = []
-        for t in inputs["text"]:
-            for _ in range(self.num_pics):
-                text_input.append(t)
+        # image: (B, NUM_PICS, C, H, W)
+        batch_size = len(inputs['images']) // self.num_pics
+        images_input = []
+        for batch in inputs['images']:
+            images_input += batch
+        text_input = inputs['text']
+
         # TODO: 10 -> X
-        images_input = inputs["images"].reshape(
-            batch_size * self.num_pics, images_shape[2], images_shape[3], images_shape[4]
-        )  # image: (B * NUM_PICS, C, H, W)
+        # images_input = inputs["images"].reshape(
+        #     batch_size * self.num_pics, images_shape[2], images_shape[3], images_shape[4]
+        # )  # image: (B * NUM_PICS, C, H, W)
         # (B * X, 2)
-        if self.match_head == "itm":
-            batch_outputs = self.blip_model(
-                {"text_input": text_input, "image": images_input},
-                match_head=self.match_head
-            ).reshape(batch_size, self.num_pics, 2)  # (B, NUM_PICS, 2)
-            batch_probas = F.softmax(batch_outputs[:, :, 1], dim=1)
-        elif self.match_head == "itc":
-            batch_outputs = self.blip_model(
-                {"text_input": text_input, "image": images_input},
-                match_head=self.match_head
-            ).reshape(batch_size, self.num_pics) # (B * NUM_PICS) -> (B, NUM_PICS)
-            # hugginface VisionTextEncoder see cos * N before softmax
-            # TODO: N as hyperparam const
-            # TODO: or learnable param
-            batch_probas = F.softmax(batch_outputs, dim=1) # softmax(cosine similarity) => =(
-        elif self.match_head == "mean":
-            raise NotImplementedError("Implement me!")
-            # Warning: not tested
-            # TODO: replace with mean(p_itm, p_itc)
-        else:
-            raise ValueError(
-                f"Unexpected value for match_head parameter"
-                "{self.match_head}\". Allowed values: \"itm\", \"itc\" or \"mean\"."
-            )
-        return batch_probas
+        # text_input = self.text_model.tokenize(text_input)
+        text_input = to_device(self.text_model.tokenize(text_input), self.text_model.device)
+        text_embedding = self.text_model.forward(text_input)['sentence_embedding']
+
+        images_input = to_device(dict(self.image_model.tokenize(images_input)), self.text_model.device)
+        image_embedding = self.image_model.forward(images_input)['sentence_embedding']
+
+        sims = 6 * torch.bmm(
+            image_embedding.view(batch_size, self.num_pics, -1),
+            text_embedding.unsqueeze(-1)
+        ).squeeze(-1)
+        return F.softmax(sims, dim=-1)
 
 
-class ItmDataset(torch.utils.data.Dataset):
+
+class ClipDataset(torch.utils.data.Dataset):
     def __init__(
             self,
             df: pd.DataFrame,
@@ -149,7 +155,7 @@ class ItmDataset(torch.utils.data.Dataset):
 
     def _get_image_batch(self, idx: int) -> torch.Tensor:
         row = self.df.iloc[idx]
-        return torch.stack([self._get_image_tensor(row[f"image{i}"]) for i in range(self.num_pics)])
+        return [self._get_image_tensor(row[f"image{i}"]) for i in range(self.num_pics)]
 
     def _make_tokens(self, idx: int) -> BatchEncoding:
         return self.text_processor(self.df.iloc[idx][self.text_field])

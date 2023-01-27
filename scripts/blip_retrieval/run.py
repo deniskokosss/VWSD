@@ -31,12 +31,47 @@ from src.data import CustomSplitLoader
 from src.utils import evaluate, mrr
 from src.blip_retrieval import BLIPRetrieval, RetrievalDataset
 from src.blip_itm import ItmDataset
+from torch.utils.data.dataloader import default_collate
 
 
 def to_device(object, device):
     if not isinstance(object, dict):
         raise NotImplementedError("Implement other types than dict if needed!")
     return {k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in object.items()}
+
+
+@torch.no_grad()
+def get_negatives(model, dataloader, device):
+    images = []
+    texts = []
+    ids = []
+    for (i, batch) in enumerate(dataloader):
+        image_embed, text_embed = model.get_embeddings(to_device(batch, device))
+        images += image_embed
+        texts += text_embed
+        assert i == batch['image_id']
+        ids += batch['image_id']
+    images = torch.stack(images)
+    texts = torch.stack(texts)
+    sim_matrix = torch.matmul(images, texts.T)
+    sim_matrix = sim_matrix - torch.eye(sim_matrix.shape[0]).to(device)
+    return {
+        idx.item(): [neg0.item(), neg1.item()]
+        for idx, neg0, neg1 in zip(ids, torch.argmax(sim_matrix, 0), torch.argmax(sim_matrix, 1))
+    }
+
+
+def hard_negatives_collate(samples, hard_negatives, dataset):
+    neg_samples = []
+    for idx in samples['image_id']:
+        for neg_idx in hard_negatives[idx.item()]:
+            neg_samples.append(dataset[neg_idx])
+    neg_batch = default_collate(neg_samples)
+
+    samples['text_input'] = samples['text_input'] + neg_batch['text_input']
+    samples['image'] = torch.cat([samples['image'], neg_batch['image']])
+    samples['image_id'] = torch.cat([samples['image_id'], neg_batch['image_id']])
+    return samples
 
 
 @hydra.main(version_base=None, config_path="config", config_name="config")
@@ -125,6 +160,8 @@ def run(cfg: DictConfig) -> None:
 
         train_dl = torch.utils.data.DataLoader(train_ds, batch_size=cfg.train.TRAIN_BATCH_SIZE, drop_last=True,
                                                num_workers=cfg.NUM_WORKERS, persistent_workers=True, shuffle=True)
+        train_dl_hn = torch.utils.data.DataLoader(train_ds, batch_size=1,
+                                               num_workers=cfg.NUM_WORKERS, persistent_workers=True, shuffle=False)
         val_dl = torch.utils.data.DataLoader(val_ds, batch_size=cfg.train.VALIDATION_BATCH_SIZE,
                                              num_workers=cfg.NUM_WORKERS, persistent_workers=True)
         val2_dl = torch.utils.data.DataLoader(val2_ds, batch_size=cfg.train.VALIDATION_BATCH_SIZE,
@@ -156,6 +193,13 @@ def run(cfg: DictConfig) -> None:
     blip_model = load_model("blip_retrieval", cfg.model.BLIP_VARIANT)
     model = BLIPRetrieval(blip_model, head=cfg.model.HEAD).to(DEVICE)
 
+    if cfg.model.CHECKPOINT:
+        p = Path(cfg.model.CHECKPOINT)
+        dict_ = torch.load(p)
+        model.load_state_dict(dict_['model'])
+
+        logging.info(f"Loaded {p}")
+
     metric2name = {
         "acc1": "Accuracy@Top1",
         "acc3": "Accuracy@Top3",
@@ -178,6 +222,7 @@ def run(cfg: DictConfig) -> None:
 
     def div_scores(scores, n):
         return {k: v / n for k, v in scores.items()}
+
 
     loss_fn = nn.CrossEntropyLoss()
     if cfg.DO_TRAINING:
@@ -221,9 +266,16 @@ def run(cfg: DictConfig) -> None:
 
         progress_bar = tqdm(range(num_training_steps))
         for epoch_num in range(num_epochs):
+
+            if cfg.train.HARD_NEGATIVES.SCHEDULE and epoch_num in cfg.train.HARD_NEGATIVES.SCHEDULE:
+                logging.info(f"Mining hard negatives at epoch {epoch_num}...")
+                hard_negatives = get_negatives(model, train_dl_hn, DEVICE)
+
             model.train()
             train_loss = 0.0
             for batch in train_dl:
+                if cfg.train.HARD_NEGATIVES.SCHEDULE:
+                    batch = hard_negatives_collate(batch, hard_negatives, train_ds)
                 batch = to_device(batch, DEVICE)
                 batch.update(
                     {
@@ -288,19 +340,6 @@ def run(cfg: DictConfig) -> None:
                     }, p)
 
     if cfg.DO_TEST:
-
-        predictions = []
-        with torch.no_grad():
-            for (i, batch) in enumerate(tqdm(test2_dl)):
-                preds = model(to_device(batch, DEVICE))[0].cpu().numpy()
-                row = test2_df.iloc[i]
-                predictions.append({row[f"image{j}"]: preds[j] for j in range(10)})
-        print("Test2: ", evaluate(
-            test2_df.iloc[:, 2:-1].values,
-            test2_df["label"].values.reshape(-1, 1),
-            predictions,
-        ))
-
         predictions = []
         with torch.no_grad():
             for (i, batch) in enumerate(tqdm(test_dl)):
@@ -313,6 +352,24 @@ def run(cfg: DictConfig) -> None:
             test_df["label"].values.reshape(-1, 1),
             predictions,
         ))
+
+
+        predictions = []
+        csv = []
+        with torch.no_grad():
+            for (i, batch) in enumerate(tqdm(test2_dl)):
+                preds = model(to_device(batch, DEVICE))[0].cpu().numpy()
+                row = test2_df.iloc[i]
+
+                d = {row[f"image{j}"]: preds[j] for j in range(10)}
+                predictions.append(d)
+                csv.append([key for key,val in sorted(d.items(), key=lambda x: x[1], reverse=True)])
+        print("Test2: ", evaluate(
+            test2_df.iloc[:, 2:-1].values,
+            test2_df["label"].values.reshape(-1, 1),
+            predictions,
+        ))
+        pd.DataFrame(csv).to_csv(f'{HydraConfig.get().runtime.output_dir}/predictions.txt', sep='\t', header=False,)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,6 @@
+HEAD: clip
+MODEL_VERSION: 1
+BLIP_VARIANT: sentence-transformers/clip-ViT-B-32-multilingual-v1
+
+NUM_PICS: 10
+CHECKPOINT: False

@@ -123,9 +123,6 @@ class ItmDataset(Dataset):
             "image_names": names,
         }
 
-# INFO: datasets below should not be used as the new one ItmDataset includes more functionality 
-#   left for old notebooks
-
 class DefaultDataset(Dataset):
     def __init__(
         self,
@@ -135,6 +132,7 @@ class DefaultDataset(Dataset):
         vis_processor,
         use_context_as_text: bool = True,
         num_pics: int = 10,
+        ignore_labels: bool = False,
     ) -> None:
         self.df = df
         self.images_path = images_path
@@ -142,7 +140,7 @@ class DefaultDataset(Dataset):
         self.vis_processor = vis_processor
         self.text_field = "context" if use_context_as_text else "word"
         self.num_pics = num_pics
-        self.labels_map = self._gen_labels()
+        self.labels_map = None if ignore_labels else self._gen_labels()
 
     def _gen_labels(self) -> Dict[int, int]: # index to label
         labels = self.df["label"].values
@@ -167,11 +165,72 @@ class DefaultDataset(Dataset):
 
     def __getitem__(self, idx: int) -> Dict[str, Union[torch.Tensor, BatchEncoding, int]]:
         # makes a batch for each row!
-        return {
+        res = {
             "text": self._make_tokens(idx),
-            "images": self._make_image_batch(idx),
-            "label": self.labels_map[idx],
+            "images": self._make_image_batch(idx), 
         }
+        if self.labels_map is not None:
+            res["label"] = self.labels_map[idx]
+        return res 
+
+class DefaultDatasetMultiaug(Dataset):
+    def __init__(
+        self,
+        df: pd.DataFrame,
+        images_path: Path,
+        text_processor,
+        vis_processor,
+        vis_aug,
+        n_aug: int = 9,
+        include_original: bool = True,
+        use_context_as_text: bool = True,
+        num_pics: int = 10,
+        ignore_labels: bool = False,
+    ) -> None:
+        self.df = df
+        self.images_path = images_path
+        self.text_processor = text_processor
+        self.vis_processor = vis_processor
+        self.vis_aug = vis_aug
+        self.n_aug = n_aug
+        self.include_original = include_original
+        self.text_field = "context" if use_context_as_text else "word"
+        self.num_pics = num_pics
+        self.labels_map = None if ignore_labels else self._gen_labels()
+
+    def _gen_labels(self) -> Dict[int, int]: # index to label
+        labels = self.df["label"].values
+        zips = []
+        for i in range(self.num_pics):
+            images = self.df[f"image{i}"].values
+            zips.append(zip(np.argwhere(labels == images).reshape(-1), infinite_repeat(i)))
+        return dict(concat_iters(*tuple(zips)))
+    
+    def __len__(self) -> int:
+        return len(self.df)
+
+    def _make_image_tensor(self, name: str, aug: bool = False) -> torch.Tensor:
+        img = Image.open(self.images_path / name).convert("RGB")
+        return self.vis_processor(self.vis_aug(img) if aug else img)
+    
+    def _make_image_batch(self, idx: int) -> torch.Tensor:
+        row = self.df.iloc[idx]
+        orig = [torch.stack([self._make_image_tensor(row[f"image{i}"]) for i in range(self.num_pics)]),] if self.include_original else []
+        augmented = [torch.stack([self._make_image_tensor(row[f"image{i}"], aug=True) for i in range(self.num_pics)]) for _ in range(self.n_aug)]
+        return torch.stack(orig + augmented)
+
+    def _make_tokens(self, idx: int) -> BatchEncoding:
+        return self.text_processor(self.df.iloc[idx][self.text_field])
+
+    def __getitem__(self, idx: int) -> Dict[str, Union[torch.Tensor, BatchEncoding, int]]:
+        # makes a batch for each row!
+        res = {
+            "text": self._make_tokens(idx),
+            "images": self._make_image_batch(idx), 
+        }
+        if self.labels_map is not None:
+            res["label"] = self.labels_map[idx]
+        return res 
 
 class AltNSDataset(Dataset):
     def __init__(

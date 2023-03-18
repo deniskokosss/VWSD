@@ -6,6 +6,8 @@ from logging import warn
 import numpy as np
 from functools import reduce
 from PIL import Image
+import torch
+import torch.nn as nn
 
 class CustomSplitLoader:
     def __init__(
@@ -48,3 +50,54 @@ class CustomSplitLoader:
         df.columns = ["word", "context"] + [f"image{i}" for i in range(10)]
         df["label"] = pd.read_csv(self.labels_path, sep="\t", header=None)
         return self.make_word_isolated_splits(df) if self.isolate_words else self.make_simple_splits(df)
+
+class ImageSet:
+    def __init__(
+        self,
+        images_path: Path,
+        image_processor: Callable[[Image], torch.Tensor],
+        similarity_measure: Callable[[torch.Tensor], torch.Tensor] = nn.CosineSimilarity(dim=1),
+        enable_cache: bool = True,
+    ) -> None:
+        self.images_path = images_path
+        self.image_processor = image_processor
+        self.enable_cache = enable_cache
+        self.similarity_measure = similarity_measure
+        self.tensor_cache: Dict[str, torch.Tensor] = dict() # <file name> -> <data>
+        self.embedding_cache: Dict[str, torch.Tensor] = dict() # <file name> -> <embedding>
+        self.similarities_cache: Dict[str, Dict[str, float]] = dict() # fn1 -> fn2 -> sim(fn1, fn2)
+
+    def __getitem__(self, file_name: Union[str, List[str]]) -> torch.Tensor:
+        if isinstance(file_name, list):
+            return torch.stack([self[n] for n in file_name])
+
+        if file_name in self.tensor_cache:
+            return self.tensor_cache[file_name]
+        loaded = self.image_processor(Image.open(self.images_path / file_name).convert("RGB"))
+        if self.enable_cache:
+            self.tensor_cache[file_name] = loaded
+        return loaded
+
+    @property
+    def known_embs(self) -> List[str]:
+        return list(self.embedding_cache.keys())
+
+    def update_emb(self, file_name: str, vec: torch.Tensor):
+        self.embedding_cache[file_name] = vec
+
+    def get_emb(self, file_name: str) -> Optional[torch.Tensor]:
+        try:
+            return self.embedding_cache[file_name]
+        except:
+            return None
+    
+    def get_sims(self, file_names: List[str]) -> Optional[torch.Tensor]:
+        embeddings = []
+        for name in file_names:
+            emb = self.get_emb(name)
+            if emb is None:
+                return None
+            embeddings.append(emb)
+        embeddings = torch.stack(embeddings)
+        return self.similarity_measure(embeddings)
+        

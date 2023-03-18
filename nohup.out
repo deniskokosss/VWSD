@@ -1,0 +1,434 @@
+[I 2023-01-09 02:22:34.779 LabApp] JupyterLab extension loaded from /home/s1m00n/.local/lib/python3.10/site-packages/jupyterlab
+[I 2023-01-09 02:22:34.779 LabApp] JupyterLab application directory is /home/s1m00n/.local/share/jupyter/lab
+[I 02:22:34.782 NotebookApp] Serving notebooks from local directory: /home/s1m00n/research/vwsd
+[I 02:22:34.782 NotebookApp] Jupyter Notebook 6.5.1 is running at:
+[I 02:22:34.782 NotebookApp] http://localhost:8888/?token=df7fe3c269b4d52eaf06e9ba88cf7d2ca4851a593e0c2151
+[I 02:22:34.782 NotebookApp]  or http://127.0.0.1:8888/?token=df7fe3c269b4d52eaf06e9ba88cf7d2ca4851a593e0c2151
+[I 02:22:34.782 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 02:22:34.785 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///home/s1m00n/.local/share/jupyter/runtime/nbserver-2042-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8888/?token=df7fe3c269b4d52eaf06e9ba88cf7d2ca4851a593e0c2151
+     or http://127.0.0.1:8888/?token=df7fe3c269b4d52eaf06e9ba88cf7d2ca4851a593e0c2151
+[I 02:25:37.615 NotebookApp] Creating new notebook in 
+[I 02:25:37.704 NotebookApp] Kernel started: 2f899a60-49b7-40c8-a488-1debb4c55096, name: lavis
+[W 02:25:37.718 NotebookApp] delete /blip-itm-27-jvsc-b4714a7a-26e2-4c9e-9f62-c8db1022ffd64635dad3-4416-4595-b97b-940a3b8d5b8e.ipynb
+[I 02:31:29.210 NotebookApp] Creating new notebook in 
+[I 02:31:29.271 NotebookApp] Kernel started: eaf0cb79-4ff9-432e-96c3-b2cd46b94141, name: lavis
+[W 02:31:29.283 NotebookApp] delete /blip-itm-26-jvsc-090a44d1-bbf9-4c59-957d-0502497fce1934028428-660d-46eb-913d-4d70fa4f1b99.ipynb
+[I 03:16:11.641 NotebookApp] Kernel restarted: eaf0cb79-4ff9-432e-96c3-b2cd46b94141
+[I 03:16:11.643 NotebookApp] Starting buffering for eaf0cb79-4ff9-432e-96c3-b2cd46b94141:18fe47b0-82c8-484b-bed4-51843e7d730f
+[I 03:16:11.648 NotebookApp] Restoring connection for eaf0cb79-4ff9-432e-96c3-b2cd46b94141:18fe47b0-82c8-484b-bed4-51843e7d730f
+[I 03:18:48.073 NotebookApp] Creating new notebook in 
+[I 03:18:48.138 NotebookApp] Kernel started: fdb3be63-e2ea-41c2-a02a-d92d6fdd3ea6, name: lavis
+[W 03:18:48.146 NotebookApp] delete /eda-jvsc-8194bb15-bf73-4c90-965f-0b1f187d8d10160157ee-bfee-455b-bad7-b9b3dba90ca2.ipynb
+[I 16:26:01.513 NotebookApp] Starting buffering for 2f899a60-49b7-40c8-a488-1debb4c55096:616f1505-a1c3-47a6-85b4-b2e095a91d8d
+[I 16:26:01.515 NotebookApp] Starting buffering for eaf0cb79-4ff9-432e-96c3-b2cd46b94141:18fe47b0-82c8-484b-bed4-51843e7d730f
+[I 16:26:01.516 NotebookApp] Starting buffering for fdb3be63-e2ea-41c2-a02a-d92d6fdd3ea6:11a9e2d3-656d-4afa-b720-fc324a5b836d
+[W 20:43:22.808 NotebookApp] Forbidden
+[W 20:43:22.808 NotebookApp] 403 GET /api/kernelspecs?1673372602781 (127.0.0.1) 0.620000ms referer=None
+[W 20:43:22.809 NotebookApp] Forbidden
+[W 20:43:22.810 NotebookApp] 403 GET /api/kernelspecs?1673372602797 (127.0.0.1) 0.950000ms referer=None
+[W 20:43:22.810 NotebookApp] Forbidden
+[W 20:43:22.810 NotebookApp] 403 GET /api/kernels?1673372602799 (127.0.0.1) 1.030000ms referer=None
+[W 20:43:22.810 NotebookApp] Forbidden
+[W 20:43:22.810 NotebookApp] 403 GET /api/kernels?1673372602801 (127.0.0.1) 1.160000ms referer=None
+[W 20:43:22.810 NotebookApp] Forbidden
+[W 20:43:22.810 NotebookApp] 403 GET /api/sessions?1673372602803 (127.0.0.1) 1.270000ms referer=None
+[W 20:43:22.811 NotebookApp] Forbidden
+[W 20:43:22.811 NotebookApp] 403 GET /api/kernels?1673372602804 (127.0.0.1) 1.410000ms referer=None
+[W 20:43:22.811 NotebookApp] Forbidden
+[W 20:43:22.811 NotebookApp] 403 GET /api/sessions?1673372602806 (127.0.0.1) 1.510000ms referer=None
+[W 20:43:22.818 NotebookApp] Forbidden
+[W 20:43:22.818 NotebookApp] 403 GET /api/kernelspecs?1673372602811 (127.0.0.1) 0.300000ms referer=None
+[W 20:43:24.609 NotebookApp] Forbidden
+[W 20:43:24.609 NotebookApp] 403 GET /api/sessions?1673372604607 (127.0.0.1) 0.570000ms referer=None
+[I 23:23:30.611 NotebookApp] Creating new notebook in 
+[I 23:23:30.649 NotebookApp] Kernel started: e6b6967a-9854-44aa-a14c-7ecaa72bc89a, name: lavis
+[W 23:23:30.658 NotebookApp] delete /blip-itm-28-jvsc-8276ff51-107c-4c08-ae8e-54f20b78648418970974-d71c-4351-abb3-f797af530ecd.ipynb
+[I 23:54:54.916 NotebookApp] Starting buffering for fdb3be63-e2ea-41c2-a02a-d92d6fdd3ea6:88dd9153-e752-4eff-b26b-d07599fd6646
+[I 23:57:08.654 NotebookApp] Creating new notebook in 
+[I 23:57:08.689 NotebookApp] Kernel started: 19dd51ef-53fc-46e8-8939-adedb609420d, name: lavis
+[W 23:57:08.696 NotebookApp] delete /blip-itm-28-jvsc-c68bb642-b762-430a-9528-9bcd06f7668753fb722b-2739-4def-bdd7-b1df87c35e2c.ipynb
+[I 23:58:06.927 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 23:58:06.929 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 23:58:06.933 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 01:51:12.272 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 01:51:12.274 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 01:51:12.277 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:02:44.808 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:02:44.810 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:02:44.813 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:02:58.075 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:02:58.076 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:02:58.079 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:03:35.803 NotebookApp] Kernel interrupted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:04:52.296 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:04:52.298 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:04:52.301 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:05:30.888 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:05:30.889 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:05:30.893 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:07:24.516 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:07:24.518 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:07:24.522 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:08:22.243 NotebookApp] Kernel shutdown: 2f899a60-49b7-40c8-a488-1debb4c55096
+[I 02:08:23.384 NotebookApp] Starting buffering for 2f899a60-49b7-40c8-a488-1debb4c55096:326ab0f7-c86e-4bf2-bba1-4adbe5ba725b
+[I 02:08:26.430 NotebookApp] Kernel shutdown: fdb3be63-e2ea-41c2-a02a-d92d6fdd3ea6
+[I 02:08:27.419 NotebookApp] Starting buffering for fdb3be63-e2ea-41c2-a02a-d92d6fdd3ea6:a8d5692f-06b5-4cd7-9511-8713d17bd92c
+[I 02:13:42.463 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:13:42.466 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:13:42.469 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:14:21.408 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:14:21.409 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:14:21.413 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:14:28.550 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:14:28.551 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:14:28.554 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:17:46.468 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:17:46.471 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:17:46.474 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:20:54.758 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:20:54.760 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:20:54.763 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:21:40.903 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:21:40.905 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:21:40.907 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:37:55.786 NotebookApp] Creating new notebook in 
+[I 02:37:55.956 NotebookApp] Kernel started: 06314a42-c828-459f-8ab1-e43dfb424898, name: lavis
+[W 02:37:56.019 NotebookApp] delete /blip-itm-29-jvsc-3a771e80-9bb7-4ce5-a6f2-992fad515e46623e0079-7ed8-413d-95e5-340f832662c1.ipynb
+[I 02:41:21.236 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 02:41:21.246 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[I 02:41:21.257 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[W 02:41:25.806 NotebookApp] Nudge: attempt 10 on kernel 06314a42-c828-459f-8ab1-e43dfb424898
+[I 02:43:39.857 NotebookApp] Kernel interrupted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 02:43:42.612 NotebookApp] Kernel interrupted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:43:53.991 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 02:43:53.993 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[I 02:43:53.996 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[I 02:43:54.013 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:43:54.014 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:43:54.018 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:45:44.624 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:45:44.626 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:45:44.630 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:46:03.690 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:46:03.692 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:46:03.696 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:48:06.477 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:48:06.478 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:48:06.481 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:49:00.238 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:49:00.239 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:49:00.242 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:49:15.803 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:49:15.806 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:49:15.830 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:51:10.597 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:51:10.599 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:51:10.603 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:51:10.619 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 02:51:10.620 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[I 02:51:10.623 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[I 02:51:37.039 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:51:37.040 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:51:37.042 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:51:41.335 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 02:51:41.336 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:51:41.339 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 02:52:07.786 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 02:52:07.802 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[I 02:52:07.830 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[I 02:52:19.921 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 02:52:19.936 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[I 02:52:19.960 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[I 02:52:23.322 NotebookApp] Replaying 1 buffered messages
+[I 03:21:34.327 NotebookApp] Kernel interrupted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 03:21:43.020 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 03:21:43.043 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[I 03:21:43.069 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[I 03:22:43.588 NotebookApp] Kernel interrupted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 03:22:46.717 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:027e5268-df76-473d-9576-321f729c981b
+[I 03:22:55.131 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 03:22:55.133 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 03:22:55.137 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 03:55:17.280 NotebookApp] Creating new notebook in 
+[I 03:55:17.729 NotebookApp] Kernel started: 67cf6466-8ea8-4d48-b8b6-e535ce49fad1, name: lavis
+[W 03:55:18.083 NotebookApp] delete /eda-jvsc-ac1f77be-f33c-405c-b29f-6537723914f7c88f8519-7c7e-48c2-8439-759d5a0a8c47.ipynb
+[I 03:59:33.115 NotebookApp] Kernel interrupted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[IPKernelApp] ERROR | KeyboardInterrupt caught in kernel.
+[I 03:59:46.886 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 03:59:47.686 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 03:59:47.689 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:00:22.171 NotebookApp] Kernel interrupted: 67cf6466-8ea8-4d48-b8b6-e535ce49fad1
+[I 04:10:55.693 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 04:10:55.695 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:10:55.698 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:13:43.628 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 04:13:43.630 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:13:43.632 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:14:17.166 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 04:14:17.167 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:14:17.170 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[E 04:23:36.049 NotebookApp] Could not open static file ''
+[W 04:23:36.132 NotebookApp] 404 GET /nbextensions/jupyter-js-widgets/extension.js (127.0.0.1) 314.250000ms referer=None
+[W 04:23:36.134 NotebookApp] 404 GET /nbextensions/jupyterlab-plotly/extension.js (127.0.0.1) 314.540000ms referer=None
+[I 04:23:46.044 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 04:23:46.068 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 04:23:46.094 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 04:45:28.896 NotebookApp] Kernel interrupted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 04:45:31.842 NotebookApp] Kernel interrupted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 04:45:38.508 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 04:45:38.510 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:45:38.513 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:45:40.422 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 04:45:40.423 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 04:45:40.427 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 04:46:20.501 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 04:46:20.502 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:46:20.506 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:48:53.814 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 04:48:53.817 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 04:48:53.820 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 04:52:50.535 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 04:52:50.537 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:52:50.541 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:53:29.560 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 04:53:29.562 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:53:29.564 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 04:53:55.965 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 04:53:55.978 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 04:53:56.006 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 04:55:50.921 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 04:55:50.931 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 04:55:50.947 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 05:01:28.084 NotebookApp] Kernel interrupted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 05:01:32.887 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 05:01:32.889 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 05:01:32.893 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 05:01:40.470 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 05:01:40.472 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 05:01:40.476 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 05:05:11.917 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 05:05:11.919 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 05:05:11.923 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 05:05:59.730 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 05:05:59.731 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 05:05:59.735 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 05:06:00.239 NotebookApp] Replaying 1 buffered messages
+[I 05:06:28.922 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 05:06:28.923 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 05:06:28.927 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 05:06:40.222 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 05:06:40.223 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 05:06:40.227 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 05:06:48.775 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 05:06:48.776 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 05:06:48.780 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 11:39:40.789 NotebookApp] Kernel interrupted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 11:40:24.559 NotebookApp] Kernel restarted: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 11:40:24.561 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 11:40:24.566 NotebookApp] Restoring connection for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 11:47:05.060 NotebookApp] Creating new notebook in 
+[I 11:47:05.116 NotebookApp] Kernel started: 089c1cf9-6194-4e6b-8bb4-a572752334f4, name: lavis
+[W 11:47:05.127 NotebookApp] delete /blip-itm-23-jvsc-fc4e0817-008a-4c97-b8a2-5239d39f38816b0ebaf9-de12-4781-a441-ca7b077f0e03.ipynb
+[I 11:21:51.441 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:fb38ac5f-0d72-4b20-9834-2333b9ba344f
+[I 11:21:51.445 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:92363a73-6d87-48b9-8c26-a3ccd3f4251c
+[I 11:21:51.446 NotebookApp] Starting buffering for 67cf6466-8ea8-4d48-b8b6-e535ce49fad1:3970594b-5b01-4c1b-8e0a-f237796fd390
+[I 11:21:51.449 NotebookApp] Starting buffering for 089c1cf9-6194-4e6b-8bb4-a572752334f4:fa80b81f-424b-4538-91a4-bf0ec6912ed5
+[I 13:18:37.417 NotebookApp] Kernel restarted: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 13:18:37.419 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:97b8bc08-0157-44b0-9d22-3eb7a22b33d6
+[I 13:18:37.422 NotebookApp] Restoring connection for 19dd51ef-53fc-46e8-8939-adedb609420d:97b8bc08-0157-44b0-9d22-3eb7a22b33d6
+[I 13:22:47.774 NotebookApp] Creating new notebook in 
+[I 13:22:47.811 NotebookApp] Kernel started: e61b6456-29af-4466-bf26-b395495c6148, name: python3
+[W 13:22:47.819 NotebookApp] delete /blip-itm-30-jvsc-1092a58b-4141-46d4-ad60-295c572550d8520f5b5d-e328-4f3d-99c1-71ff404874b7.ipynb
+[I 13:22:52.496 NotebookApp] Starting buffering for e61b6456-29af-4466-bf26-b395495c6148:6ba69411-e0e5-41b7-b43e-34dce8acd41f
+[I 13:22:54.754 NotebookApp] Creating new notebook in 
+[I 13:22:54.788 NotebookApp] Kernel started: 47b58572-f3c3-47c3-8be2-fcd778d9a14b, name: lavis
+[W 13:22:54.794 NotebookApp] delete /blip-itm-30-jvsc-8414b37c-7129-4322-b569-6c8546ab44e3bc96c993-1a57-4627-af2b-b5f4fc4f9b22.ipynb
+[I 15:14:35.817 NotebookApp] Kernel restarted: 47b58572-f3c3-47c3-8be2-fcd778d9a14b
+[I 15:14:35.821 NotebookApp] Starting buffering for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:c111f2bc-c59b-4b5b-8caf-0601577db8f6
+[I 15:14:35.825 NotebookApp] Restoring connection for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:c111f2bc-c59b-4b5b-8caf-0601577db8f6
+[I 15:15:16.129 NotebookApp] Kernel restarted: 47b58572-f3c3-47c3-8be2-fcd778d9a14b
+[I 15:15:16.130 NotebookApp] Starting buffering for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:c111f2bc-c59b-4b5b-8caf-0601577db8f6
+[I 15:15:16.133 NotebookApp] Restoring connection for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:c111f2bc-c59b-4b5b-8caf-0601577db8f6
+[I 17:02:11.161 NotebookApp] Kernel restarted: 47b58572-f3c3-47c3-8be2-fcd778d9a14b
+[I 17:02:11.164 NotebookApp] Starting buffering for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:c111f2bc-c59b-4b5b-8caf-0601577db8f6
+[I 17:02:11.168 NotebookApp] Restoring connection for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:c111f2bc-c59b-4b5b-8caf-0601577db8f6
+[I 17:02:13.892 NotebookApp] Kernel restarted: 47b58572-f3c3-47c3-8be2-fcd778d9a14b
+[I 17:02:13.893 NotebookApp] Starting buffering for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:c111f2bc-c59b-4b5b-8caf-0601577db8f6
+[I 17:02:13.897 NotebookApp] Restoring connection for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:c111f2bc-c59b-4b5b-8caf-0601577db8f6
+[I 17:02:17.046 NotebookApp] Kernel restarted: 47b58572-f3c3-47c3-8be2-fcd778d9a14b
+[I 17:02:17.047 NotebookApp] Starting buffering for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:c111f2bc-c59b-4b5b-8caf-0601577db8f6
+[I 17:02:17.050 NotebookApp] Restoring connection for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:c111f2bc-c59b-4b5b-8caf-0601577db8f6
+[I 01:13:57.534 NotebookApp] Starting buffering for 19dd51ef-53fc-46e8-8939-adedb609420d:97b8bc08-0157-44b0-9d22-3eb7a22b33d6
+[I 01:13:57.552 NotebookApp] Starting buffering for 06314a42-c828-459f-8ab1-e43dfb424898:e1d82d4e-9991-4435-8b9f-2cbea04c54db
+[I 01:13:57.557 NotebookApp] Starting buffering for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:c111f2bc-c59b-4b5b-8caf-0601577db8f6
+[I 02:12:28.149 NotebookApp] Discarding 272 buffered messages for 089c1cf9-6194-4e6b-8bb4-a572752334f4:fa80b81f-424b-4538-91a4-bf0ec6912ed5
+[W 02:12:42.561 NotebookApp] Wait for final termination of kernel timed out - continuing...
+[I 02:12:42.739 NotebookApp] Kernel restarted: 089c1cf9-6194-4e6b-8bb4-a572752334f4
+[I 02:12:42.744 NotebookApp] Starting buffering for 089c1cf9-6194-4e6b-8bb4-a572752334f4:ce3aedaf-b7b3-4a4f-806b-aa00cef72da8
+[I 02:12:42.750 NotebookApp] Restoring connection for 089c1cf9-6194-4e6b-8bb4-a572752334f4:ce3aedaf-b7b3-4a4f-806b-aa00cef72da8
+Traceback (most recent call last):
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/ipykernel_launcher.py", line 17, in <module>
+    app.launch_new_instance()
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/traitlets/config/application.py", line 845, in launch_instance
+    app.initialize(argv)
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/traitlets/config/application.py", line 88, in inner
+    return method(app, *args, **kwargs)
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/ipykernel/kernelapp.py", line 666, in initialize
+    self.init_sockets()
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/ipykernel/kernelapp.py", line 307, in init_sockets
+    self.shell_port = self._bind_socket(self.shell_socket, self.shell_port)
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/ipykernel/kernelapp.py", line 244, in _bind_socket
+    return self._try_bind_socket(s, port)
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/ipykernel/kernelapp.py", line 220, in _try_bind_socket
+    s.bind("tcp://%s:%i" % (self.ip, port))
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/zmq/sugar/socket.py", line 229, in bind
+    super().bind(addr)
+  File "zmq/backend/cython/socket.pyx", line 562, in zmq.backend.cython.socket.Socket.bind
+  File "zmq/backend/cython/checkrc.pxd", line 28, in zmq.backend.cython.checkrc._check_rc
+zmq.error.ZMQError: Address already in use
+[I 02:12:48.729 NotebookApp] KernelRestarter: restarting kernel (1/5), keep random ports
+WARNING:root:kernel 089c1cf9-6194-4e6b-8bb4-a572752334f4 restarted
+[I 02:12:48.739 NotebookApp] Starting buffering for 089c1cf9-6194-4e6b-8bb4-a572752334f4:ce3aedaf-b7b3-4a4f-806b-aa00cef72da8
+[I 02:12:48.745 NotebookApp] Restoring connection for 089c1cf9-6194-4e6b-8bb4-a572752334f4:ce3aedaf-b7b3-4a4f-806b-aa00cef72da8
+[I 02:12:48.746 NotebookApp] Starting buffering for 089c1cf9-6194-4e6b-8bb4-a572752334f4:ce3aedaf-b7b3-4a4f-806b-aa00cef72da8
+[I 02:13:29.656 NotebookApp] Creating new notebook in 
+[I 02:13:29.690 NotebookApp] Kernel started: c79d038d-f675-48dd-8e92-ac05b5edbf5a, name: lavis
+[W 02:13:29.698 NotebookApp] delete /blip-itm-24-jvsc-09443e00-958d-4876-bb57-bf3361cbec325407abda-27f1-4544-85f3-807c29cd1d4a.ipynb
+[I 02:17:52.050 NotebookApp] Kernel interrupted: c79d038d-f675-48dd-8e92-ac05b5edbf5a
+[I 02:17:56.161 NotebookApp] Kernel restarted: c79d038d-f675-48dd-8e92-ac05b5edbf5a
+[I 02:17:56.163 NotebookApp] Starting buffering for c79d038d-f675-48dd-8e92-ac05b5edbf5a:53799240-e7c3-4505-8ea5-c0826765e833
+[I 02:17:56.167 NotebookApp] Restoring connection for c79d038d-f675-48dd-8e92-ac05b5edbf5a:53799240-e7c3-4505-8ea5-c0826765e833
+[I 01:15:17.584 NotebookApp] Starting buffering for c79d038d-f675-48dd-8e92-ac05b5edbf5a:53799240-e7c3-4505-8ea5-c0826765e833
+[I 11:04:10.209 NotebookApp] Discarding 1059 buffered messages for c79d038d-f675-48dd-8e92-ac05b5edbf5a:53799240-e7c3-4505-8ea5-c0826765e833
+[I 11:05:55.922 NotebookApp] Discarding 2920 buffered messages for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:c111f2bc-c59b-4b5b-8caf-0601577db8f6
+[I 11:06:57.466 NotebookApp] Starting buffering for c79d038d-f675-48dd-8e92-ac05b5edbf5a:0dc18c05-8e76-40ad-8989-635808b6c53b
+[I 11:06:57.467 NotebookApp] Starting buffering for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:46ed04e3-825e-48c6-b2e7-c4bc94334816
+[I 11:07:07.320 NotebookApp] Discarding 1 buffered messages for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:46ed04e3-825e-48c6-b2e7-c4bc94334816
+[I 11:07:46.364 NotebookApp] Kernel shutdown: e61b6456-29af-4466-bf26-b395495c6148
+[I 14:15:25.164 NotebookApp] Starting buffering for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:f72b1d5e-39e0-4d3c-bc05-c6dc9095e728
+[I 14:18:01.764 NotebookApp] Discarding 385 buffered messages for c79d038d-f675-48dd-8e92-ac05b5edbf5a:0dc18c05-8e76-40ad-8989-635808b6c53b
+[I 14:19:14.860 NotebookApp] 302 GET / (127.0.0.1) 0.330000ms
+[I 14:19:14.872 NotebookApp] 302 GET /tree? (127.0.0.1) 0.560000ms
+[W 14:19:14.936 NotebookApp] 404 GET /static/components/jquery-ui/themes/smoothness/jquery-ui.min.css (127.0.0.1) 0.970000ms referer=http://localhost:8888/login?next=%2Ftree%3F
+[W 14:25:13.874 NotebookApp] Not allowing login redirect to '/tree?'
+[I 14:25:13.874 NotebookApp] 302 POST /login?next=%2Ftree%3F (127.0.0.1) 0.920000ms
+[I 14:25:13.885 NotebookApp] 302 GET / (127.0.0.1) 0.310000ms
+[W 14:25:14.002 NotebookApp] 404 GET /static/components/jquery-ui/themes/smoothness/jquery-ui.min.css (127.0.0.1) 1.160000ms referer=http://localhost:8888/tree?
+[W 14:25:23.372 NotebookApp] 404 GET /notebooks/blip-itm-24-jvsc-09443e00-958d-4876-bb57-bf3361cbec325407abda-27f1-4544-85f3-807c29cd1d4a.ipynb (127.0.0.1): file or directory does not exist: 'blip-itm-24-jvsc-09443e00-958d-4876-bb57-bf3361cbec325407abda-27f1-4544-85f3-807c29cd1d4a.ipynb'
+[W 14:25:23.373 NotebookApp] 404 GET /notebooks/blip-itm-24-jvsc-09443e00-958d-4876-bb57-bf3361cbec325407abda-27f1-4544-85f3-807c29cd1d4a.ipynb (127.0.0.1) 1.320000ms referer=http://localhost:8888/tree?
+[W 14:25:23.408 NotebookApp] 404 GET /static/components/jquery-ui/themes/smoothness/jquery-ui.min.css (127.0.0.1) 0.860000ms referer=http://localhost:8888/notebooks/blip-itm-24-jvsc-09443e00-958d-4876-bb57-bf3361cbec325407abda-27f1-4544-85f3-807c29cd1d4a.ipynb
+[I 14:25:37.299 NotebookApp] Kernel shutdown: c79d038d-f675-48dd-8e92-ac05b5edbf5a
+[I 14:39:59.617 NotebookApp] Kernel shutdown: eaf0cb79-4ff9-432e-96c3-b2cd46b94141
+[I 14:40:01.214 NotebookApp] Kernel shutdown: e6b6967a-9854-44aa-a14c-7ecaa72bc89a
+[I 14:40:04.446 NotebookApp] Kernel shutdown: 19dd51ef-53fc-46e8-8939-adedb609420d
+[I 14:40:06.137 NotebookApp] Kernel shutdown: 06314a42-c828-459f-8ab1-e43dfb424898
+[I 14:40:08.115 NotebookApp] Kernel shutdown: 67cf6466-8ea8-4d48-b8b6-e535ce49fad1
+[I 14:40:11.598 NotebookApp] Kernel shutdown: 089c1cf9-6194-4e6b-8bb4-a572752334f4
+[I 15:56:21.339 NotebookApp] Discarding 146 buffered messages for 47b58572-f3c3-47c3-8be2-fcd778d9a14b:f72b1d5e-39e0-4d3c-bc05-c6dc9095e728
+[I 15:56:21.339 NotebookApp] Kernel shutdown: 47b58572-f3c3-47c3-8be2-fcd778d9a14b
+[I 15:57:25.765 NotebookApp] Creating new notebook in 
+[I 15:57:25.793 NotebookApp] Kernel started: bc2655fc-539f-495c-a010-295474416c5b, name: lavis
+[W 15:57:25.800 NotebookApp] delete /blip-itm-25-jvsc-3a61d6c2-8e3b-431b-837a-dff0a6d3e4823ebe0396-a6f1-4150-a1c9-d576b42176cb.ipynb
+[I 09:04:27.150 NotebookApp] Starting buffering for bc2655fc-539f-495c-a010-295474416c5b:14ff44ef-3668-409c-8eb4-3e1490abc340
+[I 11:27:20.954 NotebookApp] Discarding 190 buffered messages for bc2655fc-539f-495c-a010-295474416c5b:14ff44ef-3668-409c-8eb4-3e1490abc340
+[I 11:27:30.843 NotebookApp] Kernel shutdown: bc2655fc-539f-495c-a010-295474416c5b
+[I 02:29:35.191 NotebookApp] 302 GET / (127.0.0.1) 0.350000ms
+[W 02:29:35.234 NotebookApp] 404 GET /static/components/jquery-ui/themes/smoothness/jquery-ui.min.css (127.0.0.1) 0.620000ms referer=http://localhost:8888/tree?
+[I 02:30:02.887 NotebookApp] Creating new notebook in 
+[I 02:30:02.925 NotebookApp] Kernel started: 1ff19506-cebd-4167-8e1b-a66fe840e92b, name: lavis
+[W 02:30:02.933 NotebookApp] delete /blip-itm-32-jvsc-567e86e6-b32e-4be8-8199-f24121331ba027b30525-c5e5-40a2-b696-754c396ef99e.ipynb
+[I 02:41:45.899 NotebookApp] Kernel restarted: 1ff19506-cebd-4167-8e1b-a66fe840e92b
+[I 02:41:45.901 NotebookApp] Starting buffering for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+[I 02:41:45.904 NotebookApp] Restoring connection for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+[I 02:42:08.508 NotebookApp] Kernel restarted: 1ff19506-cebd-4167-8e1b-a66fe840e92b
+[I 02:42:08.510 NotebookApp] Starting buffering for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+[I 02:42:08.512 NotebookApp] Restoring connection for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+[I 02:43:21.211 NotebookApp] Kernel restarted: 1ff19506-cebd-4167-8e1b-a66fe840e92b
+[I 02:43:21.213 NotebookApp] Starting buffering for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+[I 02:43:21.217 NotebookApp] Restoring connection for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+[I 02:47:14.314 NotebookApp] Kernel restarted: 1ff19506-cebd-4167-8e1b-a66fe840e92b
+[I 02:47:14.315 NotebookApp] Starting buffering for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+[I 02:47:14.319 NotebookApp] Restoring connection for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+[W 02:52:06.320 NotebookApp] Wait for final termination of kernel timed out - continuing...
+[I 02:52:06.358 NotebookApp] Kernel restarted: 1ff19506-cebd-4167-8e1b-a66fe840e92b
+[I 02:52:06.365 NotebookApp] Starting buffering for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+[I 02:52:06.375 NotebookApp] Restoring connection for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+Traceback (most recent call last):
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/ipykernel_launcher.py", line 17, in <module>
+    app.launch_new_instance()
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/traitlets/config/application.py", line 845, in launch_instance
+    app.initialize(argv)
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/traitlets/config/application.py", line 88, in inner
+    return method(app, *args, **kwargs)
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/ipykernel/kernelapp.py", line 666, in initialize
+    self.init_sockets()
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/ipykernel/kernelapp.py", line 307, in init_sockets
+    self.shell_port = self._bind_socket(self.shell_socket, self.shell_port)
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/ipykernel/kernelapp.py", line 244, in _bind_socket
+    return self._try_bind_socket(s, port)
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/ipykernel/kernelapp.py", line 220, in _try_bind_socket
+    s.bind("tcp://%s:%i" % (self.ip, port))
+  File "/home/s1m00n/miniconda3/envs/lavis/lib/python3.9/site-packages/zmq/sugar/socket.py", line 229, in bind
+    super().bind(addr)
+  File "zmq/backend/cython/socket.pyx", line 562, in zmq.backend.cython.socket.Socket.bind
+  File "zmq/backend/cython/checkrc.pxd", line 28, in zmq.backend.cython.checkrc._check_rc
+zmq.error.ZMQError: Address already in use
+[I 02:52:09.349 NotebookApp] KernelRestarter: restarting kernel (1/5), keep random ports
+WARNING:root:kernel 1ff19506-cebd-4167-8e1b-a66fe840e92b restarted
+[I 02:52:09.359 NotebookApp] Starting buffering for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+[I 02:52:09.365 NotebookApp] Restoring connection for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+[I 02:52:09.366 NotebookApp] Starting buffering for 1ff19506-cebd-4167-8e1b-a66fe840e92b:f123ae31-ffe2-4769-ba71-0be516e83287
+[I 02:52:13.957 NotebookApp] Creating new notebook in 
+[I 02:52:14.006 NotebookApp] Kernel started: 9fa0da6c-ef63-42bc-8d42-009396849826, name: lavis
+[W 02:52:14.012 NotebookApp] delete /blip-itm-32-jvsc-9ac76543-1382-4f7b-9ccd-49dd4ec64f4da4342fb1-098b-4a14-ae6b-b360691f6557.ipynb
+[I 02:55:48.916 NotebookApp] Creating new notebook in 
+[I 02:55:48.962 NotebookApp] Kernel started: dc044078-6231-4b22-9647-45265126a735, name: lavis
+[W 02:55:48.970 NotebookApp] delete /blip-itm-33-jvsc-e0041038-4d13-402d-b278-11c6405f8e07a823be6a-1641-404c-ace4-62743f6615b3.ipynb
+[I 02:56:36.855 NotebookApp] Kernel interrupted: 9fa0da6c-ef63-42bc-8d42-009396849826
+[I 02:56:56.209 NotebookApp] Kernel restarted: 9fa0da6c-ef63-42bc-8d42-009396849826
+[I 02:56:56.211 NotebookApp] Starting buffering for 9fa0da6c-ef63-42bc-8d42-009396849826:f7128eb3-0184-4b86-a228-474472a2a2fb
+[I 02:56:56.214 NotebookApp] Restoring connection for 9fa0da6c-ef63-42bc-8d42-009396849826:f7128eb3-0184-4b86-a228-474472a2a2fb
+[I 02:57:07.279 NotebookApp] Kernel restarted: 9fa0da6c-ef63-42bc-8d42-009396849826
+[I 02:57:07.281 NotebookApp] Starting buffering for 9fa0da6c-ef63-42bc-8d42-009396849826:f7128eb3-0184-4b86-a228-474472a2a2fb
+[I 02:57:07.283 NotebookApp] Restoring connection for 9fa0da6c-ef63-42bc-8d42-009396849826:f7128eb3-0184-4b86-a228-474472a2a2fb
+[I 02:57:17.189 NotebookApp] Kernel restarted: dc044078-6231-4b22-9647-45265126a735
+[I 02:57:17.190 NotebookApp] Starting buffering for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
+[I 02:57:17.193 NotebookApp] Restoring connection for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
+[I 02:57:37.795 NotebookApp] Kernel restarted: dc044078-6231-4b22-9647-45265126a735
+[I 02:57:37.798 NotebookApp] Starting buffering for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
+[I 02:57:37.801 NotebookApp] Restoring connection for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
+[I 02:58:08.802 NotebookApp] Kernel restarted: dc044078-6231-4b22-9647-45265126a735
+[I 02:58:08.807 NotebookApp] Starting buffering for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
+[I 02:58:08.813 NotebookApp] Restoring connection for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
+[I 02:58:17.550 NotebookApp] Kernel restarted: dc044078-6231-4b22-9647-45265126a735
+[I 02:58:17.554 NotebookApp] Starting buffering for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
+[I 02:58:17.559 NotebookApp] Restoring connection for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
+[I 02:58:38.255 NotebookApp] Kernel restarted: dc044078-6231-4b22-9647-45265126a735
+[I 02:58:38.263 NotebookApp] Starting buffering for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
+[I 02:58:38.280 NotebookApp] Restoring connection for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
+[I 02:59:37.687 NotebookApp] Kernel interrupted: 9fa0da6c-ef63-42bc-8d42-009396849826
+[I 02:59:44.650 NotebookApp] Kernel restarted: 9fa0da6c-ef63-42bc-8d42-009396849826
+[I 02:59:44.652 NotebookApp] Starting buffering for 9fa0da6c-ef63-42bc-8d42-009396849826:f7128eb3-0184-4b86-a228-474472a2a2fb
+[I 02:59:44.655 NotebookApp] Restoring connection for 9fa0da6c-ef63-42bc-8d42-009396849826:f7128eb3-0184-4b86-a228-474472a2a2fb
+[I 02:59:47.993 NotebookApp] Kernel interrupted: dc044078-6231-4b22-9647-45265126a735
+[I 02:59:53.051 NotebookApp] Kernel restarted: dc044078-6231-4b22-9647-45265126a735
+[I 02:59:53.052 NotebookApp] Starting buffering for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
+[I 02:59:53.056 NotebookApp] Restoring connection for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
+[I 02:59:56.265 NotebookApp] Kernel restarted: 9fa0da6c-ef63-42bc-8d42-009396849826
+[I 02:59:56.266 NotebookApp] Starting buffering for 9fa0da6c-ef63-42bc-8d42-009396849826:f7128eb3-0184-4b86-a228-474472a2a2fb
+[I 02:59:56.270 NotebookApp] Restoring connection for 9fa0da6c-ef63-42bc-8d42-009396849826:f7128eb3-0184-4b86-a228-474472a2a2fb
+[I 00:47:38.163 NotebookApp] Starting buffering for 9fa0da6c-ef63-42bc-8d42-009396849826:f7128eb3-0184-4b86-a228-474472a2a2fb
+[I 00:47:38.164 NotebookApp] Starting buffering for dc044078-6231-4b22-9647-45265126a735:7d3696fe-5068-4689-af0b-4a8048cc1a2d
